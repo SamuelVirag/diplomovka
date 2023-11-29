@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 import tensorflow as tf
 import tensorflow_io as tfio
 
+
 def extract_frames(audio_file, frame_duration=0.03, overlap=0.5, sample_rate=16000):
     # Read audio file using TensorFlow I/O
     audio = tfio.audio.AudioIOTensor(audio_file)
