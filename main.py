@@ -10,8 +10,8 @@ def extract_frames(audio_file, frame_duration=0.03, overlap=0.5, sample_rate=160
     # Read audio file using TensorFlow I/O
     audio = tfio.audio.AudioIOTensor(audio_file)
 
-    frame_length = int(frame_duration * sample_rate)
-    frame_step = int(frame_length * (1 - overlap))
+    frame_length = int(frame_duration * sample_rate) #480
+    frame_step = int(frame_length * (1 - overlap)) #240
 
     # Calculate the number of frames
     num_frames = int((len(audio) - frame_length) / frame_step) + 1
@@ -21,12 +21,9 @@ def extract_frames(audio_file, frame_duration=0.03, overlap=0.5, sample_rate=160
     for i in range(num_frames):
         start = i * frame_step
         end = start + frame_length
-
         # Extract frame
         frame = audio[start:end]
-
         frames.append(frame)
-
     return frames
 
 
@@ -117,11 +114,11 @@ if __name__ == "__main__":
     # Preprocess test data
     #preprocess_data(test_data_path, test_output_path)
 
-    train_frames_path = os.path.join('data','train-data-processed-frames')
-    test_frames_path = os.path.join('data','test-data-processed-frames')
+    train_frames_path = os.path.join('data', 'train-data-processed-frames')
+    test_frames_path = os.path.join('data', 'test-data-processed-frames')
 
-    train_spectrograms_path = os.path.join('data','spectrograms','mel-train')
-    test_spectrograms_path = os.path.join('data','spectrograms','mel-test')
+    train_spectrograms_path = os.path.join('data', 'spectrograms', 'mel-train')
+    test_spectrograms_path = os.path.join('data', 'spectrograms', 'mel-test')
 
     # Generate Mel spectrograms from training frames
     generate_spectrograms_from_frames(train_frames_path, train_spectrograms_path, spectrogram_type='mel')
